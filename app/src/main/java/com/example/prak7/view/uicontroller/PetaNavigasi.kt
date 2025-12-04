@@ -10,10 +10,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.prak7.view.DetailSiswaScreen
+import com.example.prak7.view.EditSiswaScreen
 import com.example.prak7.view.EntrySiswaScreen
 import com.example.prak7.view.HomeScreen
 import com.example.prak7.view.route.DestinasiDetailSiswa
 import com.example.prak7.view.route.DestinasiDetailSiswa.itemIdArg
+import com.example.prak7.view.route.DestinasiEditSiswa
 import com.example.prak7.view.route.DestinasiHome
 import com.example.prak7.view.route.DestinasiEntry
 
@@ -43,13 +45,35 @@ fun HostNavigasi(
         }
 
         //edit 2: tambahkan 2 composable route
-        composable(route = DestinasiDetailSiswa.routeWithArgs,
-            arguments = listOf(navArgument(itemIdArg)
-            { type = NavType.IntType })
-        ){
+        composable(
+            route = DestinasiDetailSiswa.routeWithArgs,
+            arguments = listOf(
+                navArgument(DestinasiDetailSiswa.itemIdArg) {
+                    type = NavType.IntType
+                }
+            )
+        ) {
             DetailSiswaScreen(
-                //navigateToEditItem = { navController.navigate("${DestinasiEntry.route}/$it") },
-                navigateBack = { navController.navigateUp() }
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                navigateToEditItem = { siswaId ->
+                    navController.navigate("${DestinasiEditSiswa.route}/$siswaId")
+                }
+            )
+        }
+
+        composable(
+            route = DestinasiEditSiswa.routeWithArgs,
+            arguments = listOf(
+                navArgument(DestinasiEditSiswa.itemIdArg) {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            EditSiswaScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
             )
         }
     }
