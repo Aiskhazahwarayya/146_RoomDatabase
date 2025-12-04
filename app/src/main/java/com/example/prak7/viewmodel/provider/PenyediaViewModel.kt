@@ -7,7 +7,9 @@ import com.example.prak7.repositori.AplikasiSiswa
 import com.example.prak7.viewmodel.EntryViewModel
 import com.example.prak7.viewmodel.HomeViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.prak7.viewmodel.DetailViewModel
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
@@ -25,6 +27,13 @@ object PenyediaViewModel {
                 aplikasiSiswa.container.repositoriSiswa
             )
         }
+        initializer {
+            DetailViewModel(
+                this.createSavedStateHandle(),
+                aplikasiSiswa().container.repositoriSiswa
+            )
+        }
+
     }
 }
 fun CreationExtras.aplikasiSiswa(): AplikasiSiswa =
