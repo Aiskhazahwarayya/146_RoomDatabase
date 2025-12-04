@@ -9,21 +9,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.prak7.viewmodel.DetailViewModel
+import com.example.prak7.viewmodel.EditViewModel
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
 
         initializer {
-            val aplikasiSiswa = this.aplikasiSiswa()
             HomeViewModel(
-                aplikasiSiswa.container.repositoriSiswa
+                aplikasiSiswa().container.repositoriSiswa
             )
         }
         initializer {
-            // Ulangi untuk EntryViewModel
-            val aplikasiSiswa = this.aplikasiSiswa()
             EntryViewModel(
-                aplikasiSiswa.container.repositoriSiswa
+                aplikasiSiswa().container.repositoriSiswa
             )
         }
         initializer {
@@ -32,7 +30,12 @@ object PenyediaViewModel {
                 aplikasiSiswa().container.repositoriSiswa
             )
         }
-
+        initializer {
+            EditViewModel(
+                this.createSavedStateHandle(),
+                aplikasiSiswa().container.repositoriSiswa
+            )
+        }
     }
 }
 fun CreationExtras.aplikasiSiswa(): AplikasiSiswa =
