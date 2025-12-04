@@ -1,6 +1,5 @@
 package com.example.prak7.viewmodel.provider
 
-
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.prak7.repositori.AplikasiSiswa
